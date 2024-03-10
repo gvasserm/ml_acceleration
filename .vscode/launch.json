@@ -11,5 +11,12 @@
             "program": "assignment1/src/assignment1.py",
             "console": "integratedTerminal"
         },
+        {
+            "name": "assignment2",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "assignment2/src/assignment2.py",
+            "console": "integratedTerminal"
+        },
     ]
 }
