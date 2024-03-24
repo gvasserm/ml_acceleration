@@ -18,5 +18,26 @@
             "program": "assignment2/src/assignment2.py",
             "console": "integratedTerminal"
         },
+        {
+            "name": "assignment3",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "assignment3/src/assignment3.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "assignment4",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "assignment4/task_quantization/deeplab_quantization_ready/assignment4.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "test",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "assignment3/src/test.py",
+            "console": "integratedTerminal"
+        },
     ]
 }

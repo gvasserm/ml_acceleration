@@ -24,7 +24,7 @@ def init_model_student_with_pretrain(pretrain_path):
 #     tp.load_state_dict(model, state_dict=loaded_state_dict)
 
 
-def init_model_with_pretrain(id2label: Dict, label2id: Dict, pretrain_path: str = None):
+def init_model_with_pretrain_(id2label: Dict, label2id: Dict, pretrain_path: str = None):
     
     model = SegformerForSemanticSegmentation.from_pretrained(
         "nvidia/mit-b0",
@@ -39,6 +39,20 @@ def init_model_with_pretrain(id2label: Dict, label2id: Dict, pretrain_path: str 
         model.load_state_dict(state_dict)
         #model = torch.load(pretrain_path)["model"]
     return model.cuda()
+
+
+def init_model_with_pretrain(id2label: Dict, label2id: Dict, pretrain_path: str = None):
+    model = SegformerForSemanticSegmentation.from_pretrained(
+        "nvidia/mit-b0",
+        num_labels=len(id2label),
+        id2label=id2label,
+        label2id=label2id,
+    )
+
+    if pretrain_path:
+        model = torch.load(pretrain_path)["model"]
+
+    return model
 
 
 def evaluate_model(model, valid_dataloader, id2label):

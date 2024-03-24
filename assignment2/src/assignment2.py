@@ -167,6 +167,7 @@ id2label = {
     0: "background",
     1: "human",
 }
+
 label2id = {v: k for k, v in id2label.items()}
 
 dataset_dir = "/home/gvasserm/data/matting_human_dataset/"
@@ -193,6 +194,7 @@ def test2():
             batch_size=24,
             n_workers=8,
             device=torch.device('cuda'),
+            temperature=3,
             loss_weight=0.5,
             last_layer_loss_weight=0.5,
             intermediate_attn_layers_weights=(0.5, 0.5, 0.5, 0.5),
@@ -248,7 +250,7 @@ def test2():
 
 
     tb_writer = SummaryWriter(save_dir)
-
+    
     train(
         teacher_model=baseline_model,
         student_model=pruned_model,
