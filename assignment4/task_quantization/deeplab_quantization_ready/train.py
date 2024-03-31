@@ -100,16 +100,26 @@ def evaluate(model, data_loader, device, num_classes):
     return confmat
 
 
-def train_one_epoch(model, criterion, optimizer, data_loader, lr_scheduler, device, epoch, print_freq, scaler=None):
-    model.train()
+def train_one_epoch(student_model, teacher_model, criterion, optimizer, data_loader, lr_scheduler, device, epoch, print_freq, scaler=None):
+    base_k = 0.5
+    KD_k = 0.5
+
+    student_model.train()
     metric_logger = utils.MetricLogger(delimiter="  ")
     metric_logger.add_meter("lr", utils.SmoothedValue(window_size=1, fmt="{value}"))
     header = f"Epoch: [{epoch}]"
     for image, target in metric_logger.log_every(data_loader, print_freq, header):
         image, target = image.to(device), target.to(device)
         with torch.cuda.amp.autocast(enabled=scaler is not None):
-            output = model(image)
-            loss = criterion(output, target)
+            student_out = student_model(image)
+            if teacher_model is not None:
+                teacher_out = teacher_model(image)
+                KDloss1 = nn.functional.mse_loss(student_out['out'], teacher_out['out'])
+                KDloss2 = nn.functional.mse_loss(student_out['aux'], teacher_out['aux'])
+                KDloss = 0.5*KDloss1 + 0.5*KDloss2
+            else:
+                KDloss = 0
+            loss = base_k*criterion(student_out, target) + KD_k*KDloss
 
         optimizer.zero_grad()
         if scaler is not None:
