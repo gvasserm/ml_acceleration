@@ -46,6 +46,21 @@
             "program": "assignment3/src/test.py",
             "console": "integratedTerminal"
         },
+        {
+            "name": "assignment6",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "assignment6/assignment.py",
+            "console": "integratedTerminal"
+        },
+
+        {
+            "name": "assignment7",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "assignment7/assignment7.py",
+            "console": "integratedTerminal"
+        },
         
     ]
 }
