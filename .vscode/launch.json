@@ -61,6 +61,13 @@
             "program": "assignment7/assignment7.py",
             "console": "integratedTerminal"
         },
+        {
+            "name": "assignment9",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "assignment9/assignment9.py",
+            "console": "integratedTerminal"
+        },
         
     ]
 }
