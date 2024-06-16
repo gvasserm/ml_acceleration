@@ -75,6 +75,17 @@
             "program": "assignment10/assignment10.py",
             "console": "integratedTerminal"
         },
+
+        {
+            "name": "ml_system_design",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/assignment_ml_design/test_seg.py",
+            "console": "integratedTerminal",
+            "args":
+            [
+            ]
+        },
         
     ]
 }
